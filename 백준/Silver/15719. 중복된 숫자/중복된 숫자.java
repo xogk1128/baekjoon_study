@@ -13,11 +13,11 @@ public class Main {
         for(int i=0; i<N; i++){
             int num = Integer.parseInt(st.nextToken());
             arr[num]++;
-        }
+            if(arr[num] == 2){
+                System.out.println(num);
+                break;
+            }
 
-        for(int i=1; i<N; i++){
-            if(arr[i] == 2)
-                System.out.println(i);
         }
     }
 }
