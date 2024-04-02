@@ -6,26 +6,52 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static ArrayList<Integer> select = new ArrayList<>();
+//    static ArrayList<Integer> select = new ArrayList<>();
+    static int[] select;
+    static boolean[] visited;
+    static StringBuilder sb = new StringBuilder();
     static int N;
     static int M;
 
-    static void dfs(){
+//    static void dfs(){
+//
+//        if(select.size() == M) {
+//            for (Integer integer : select) {
+//                System.out.print(integer + " ");
+//            }
+//            System.out.println();
+//            return;
+//        }
+//
+//        for(int i=1; i<=N; i++){
+//            if(!select.contains(i))
+//                select.add(i);
+//            else continue;
+//            dfs();
+//            select.remove(select.size()-1);
+//        }
+//    }
 
-        if(select.size() == M) {
+    static void dfs(int len){
+
+        if(len == M) {
             for (Integer integer : select) {
-                System.out.print(integer + " ");
+                sb.append(integer + " ");
             }
-            System.out.println();
+            sb.append("\n");
             return;
         }
 
         for(int i=1; i<=N; i++){
-            if(!select.contains(i))
-                select.add(i);
+            if(!visited[i]){
+                select[len] = i;
+                visited[i] = true;
+            }
             else continue;
-            dfs();
-            select.remove(select.size()-1);
+
+            dfs(len+1);
+            select[len] = 0;
+            visited[i] = false;
         }
     }
 
@@ -36,8 +62,11 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        dfs();
+        select = new int[M];
+        visited = new boolean[N+1];
 
+        dfs(0);
+        System.out.println(sb);
 
     }
 
